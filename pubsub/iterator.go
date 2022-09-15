@@ -566,6 +566,7 @@ func (it *messageIterator) retryAcks(m map[string]*AckResult) {
 func (it *messageIterator) retryModAcks(m map[string]*AckResult, deadlineSec int32) {
 	bo := newExactlyOnceBackoff()
 	retryCount := 0
+	log.Printf("retrying modacks for "+len(m))
 	ctx, cancel := context.WithTimeout(context.Background(), exactlyOnceDeliveryRetryDeadline)
 	defer cancel()
 	for {
